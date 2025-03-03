@@ -17,4 +17,10 @@ class TaskCubit extends Cubit<TaskState>{
     final updatedTasks = List<String>.from(state.tasks)..removeAt(index);
     emit(TaskState(tasks: updatedTasks));
   }
+
+  void updateTask(int index, String task){
+    final updatedTasks = List<String>.from(state.tasks);
+    updatedTasks[index] = task;
+    emit(TaskState(tasks: updatedTasks));
+  }
 }

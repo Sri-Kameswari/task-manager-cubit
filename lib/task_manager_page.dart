@@ -21,9 +21,18 @@ class TaskManagerPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(state.tasks[index]),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete, color: Colors.red),
-                        onPressed: () => context.read<TaskCubit>().deleteTask(index),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Colors.blueGrey),
+                            onPressed: () => _showUpdateTaskDialog(context, index, state.tasks[index]),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => context.read<TaskCubit>().deleteTask(index),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -65,4 +74,34 @@ class TaskManagerPage extends StatelessWidget {
       },
     );
   }
+
+  void _showUpdateTaskDialog(BuildContext context, int index, String currentTask) {
+    TextEditingController taskController = TextEditingController(text: currentTask);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Update Task"),
+          content: TextField(controller: taskController),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                String task = taskController.text.trim();
+                if (task.isNotEmpty) {
+                  context.read<TaskCubit>().updateTask(index, task);
+                }
+                Navigator.pop(context);
+              },
+              child: Text("Add"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
