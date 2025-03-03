@@ -14,19 +14,19 @@ class TaskManagerPage extends StatelessWidget {
             child: Text("Add Task"),
           ),
           Expanded(
-            child: BlocBuilder<TaskCubit, TaskState>(
+            child: BlocBuilder<TaskCubit, List<String>>(
               builder: (context, state) {
                 return ListView.builder(
-                  itemCount: state.tasks.length,
+                  itemCount: state.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(state.tasks[index]),
+                      title: Text(state[index]),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
                             icon: Icon(Icons.edit, color: Colors.blueGrey),
-                            onPressed: () => _showUpdateTaskDialog(context, index, state.tasks[index]),
+                            onPressed: () => _showUpdateTaskDialog(context, index, state[index]),
                           ),
                           IconButton(
                             icon: Icon(Icons.delete, color: Colors.red),
