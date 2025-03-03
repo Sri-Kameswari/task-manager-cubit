@@ -8,7 +8,7 @@ A simple Task Manager app built using Flutter, leveraging **Cubit** for state ma
 - **Update Tasks**: Modify existing tasks.
 - **Delete Tasks**: Remove tasks from the list.
 
-##Screenshots
+## Screenshots
 
 <img src="https://github.com/user-attachments/assets/c73b793e-03cc-4e64-a4c6-80a8623b25a2" width="300"/>
 
